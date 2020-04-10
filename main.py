@@ -12,12 +12,17 @@ client.start()
 prev_update_time = ""
 
 while True:
-    if time_has_changed(prev_update_time):
-        prev_update_time = convert_time_to_string(dt.datetime.now(pytz.timezone('Europe/Moscow')))
-        prev_update_time = prev_update_time.replace(':','_')
-        print(prev_update_time)
-        client(DeletePhotosRequest(client.get_profile_photos('me')))
-        file = client.upload_file(f"time_images/{prev_update_time}.jpg")
-        client(UploadProfilePhotoRequest(file))
+    try:
+        if time_has_changed(prev_update_time):
+            prev_update_time = convert_time_to_string(dt.datetime.now(pytz.timezone('Europe/Moscow')))
+            prev_update_time = prev_update_time.replace(':','_')
+
+            client(DeletePhotosRequest(client.get_profile_photos('me')))
+            file = client.upload_file(f"time_images/{prev_update_time}.jpg")
+            client(UploadProfilePhotoRequest(file))
+            sleep(15)
+    except:
+        print(123)
+            
 
         
