@@ -22,7 +22,7 @@ try:
             client(UploadProfilePhotoRequest(file))
             time.sleep(15)
 except:
-    print ('error' + dt.datetime.now())
+    print ('error' +str( dt.datetime.now()) )
 
 
             
